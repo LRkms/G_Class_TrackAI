@@ -25,6 +25,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "motor.h"
+#include "uart.h"
+#include "string.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -45,6 +49,8 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+  uint8_t rx_data;
 
 /* USER CODE END PV */
 
@@ -88,9 +94,15 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TIM1_Init();
-  MX_USART2_UART_Init();
+  MX_TIM2_Init();
+  MX_TIM3_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
+
+  motor_init();
+  uart_receive_start();
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);  // ENA
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);  // ENB
 
   /* USER CODE END 2 */
 
@@ -98,6 +110,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	extern UART_HandleTypeDef huart1;
+
+	char msg[] = "HELLO FROM STM32 (USART1)\n";
+	HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
