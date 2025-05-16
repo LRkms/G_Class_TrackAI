@@ -15,6 +15,8 @@
 void motor_init(void);
 void motor_forward(void);
 void motor_backward(void);
+void motor_turn_left(void);
+void motor_turn_right(void);
 void motor_stop(void);
 void set_motor_speed(uint8_t duty);
 

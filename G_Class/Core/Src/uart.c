@@ -37,6 +37,12 @@ void process_uart_command(uint8_t cmd)
         case 'S':
             motor_stop();
             break;
+        case 'L':
+            motor_turn_left();
+            break;
+        case 'R':
+            motor_turn_right();
+            break;
         default:
             break;
     }
