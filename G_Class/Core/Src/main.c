@@ -107,6 +107,7 @@ int main(void)
   uint8_t test_msg[] = "HELLO FROM STM32\r\n";
   HAL_UART_Transmit(&huart1, test_msg, sizeof(test_msg) - 1, 100);
 
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

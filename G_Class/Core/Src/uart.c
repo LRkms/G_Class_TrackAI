@@ -25,7 +25,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
     }
 }
 
-
 void process_uart_command(uint8_t cmd)
 {
     switch(cmd)
