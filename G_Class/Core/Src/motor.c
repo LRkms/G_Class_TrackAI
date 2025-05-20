@@ -17,15 +17,16 @@ extern TIM_HandleTypeDef htim2;
 // === 초기화 함수 (PWM 스타트용) ===
 void motor_init(void)
 {
-    HAL_TIM_PWM_Start(ENA_PWM);  // ENA (좌측)
-    HAL_TIM_PWM_Start(ENB_PWM);  // ENB (우측)
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);  // ENA (좌측)
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);  // ENB (우측)
 }
 // === 속도 설정 함수 수정 ===
 void set_motor_speed(uint8_t duty)
 {
-    uint32_t pwm = (duty * (__HAL_TIM_GET_AUTORELOAD(&htim2))) / 100;
-    __HAL_TIM_SET_COMPARE(&htim2, ENA_CHANNEL, pwm);  // 좌측
-    __HAL_TIM_SET_COMPARE(&htim2, ENB_CHANNEL, pwm);  // 우측
+  if (duty > 100) duty = 100;  // 안전처리
+  uint32_t pwm = (duty * (__HAL_TIM_GET_AUTORELOAD(&htim2))) / 100;
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_1, pwm);  // 좌측
+  __HAL_TIM_SET_COMPARE(&htim2, TIM_CHANNEL_2, pwm);  // 우측
 }
 
 // === 전진 ===

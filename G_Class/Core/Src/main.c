@@ -104,6 +104,9 @@ int main(void)
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);  // ENA
   HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);  // ENB
 
+  uint8_t test_msg[] = "HELLO FROM STM32\r\n";
+  HAL_UART_Transmit(&huart1, test_msg, sizeof(test_msg) - 1, 100);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
